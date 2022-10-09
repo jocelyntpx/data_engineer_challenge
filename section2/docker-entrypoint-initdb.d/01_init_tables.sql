@@ -1,9 +1,9 @@
-create table Manufacturer
+CREATE TABLE Manufacturer
 (
     manufacturer_id BIGINT PRIMARY KEY,
     manufacturer_name  TEXT
 );
-create table Model
+CREATE TABLE Model
 (
     model_id  BIGINT PRIMARY KEY,
     manufacturer_id BIGINT REFERENCES Manufacturer,
@@ -11,24 +11,24 @@ create table Model
     model_weight  INT,
     market_price  INT 
 );
-create table Car
+CREATE TABLE Car
 (
     car_id        BIGINT PRIMARY KEY,
     model_id      BIGINT REFERENCES Model,
     serial_number BIGINT
 );
-create table Salesperson
+CREATE TABLE Salesperson
 (
     salesperson_id BIGINT PRIMARY KEY,
     salesperson_name TEXT
 );
-create table Customer
+CREATE TABLE Customer
 (
     customer_id BIGINT PRIMARY KEY,
     customer_name TEXT,
     customer_phone INT
 );
-create table Transaction
+CREATE TABLE Transaction
 (
     transaction_id   BIGINT PRIMARY KEY,
     salesperson_id   BIGINT REFERENCES Salesperson,
