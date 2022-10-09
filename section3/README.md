@@ -17,14 +17,13 @@ Finally, we will use Amazon QuickSight to showcase the key statistics.
 
 ### Pros of design:
 1. The entire architecture is built using the services provided by AWS as services provided by AWS are already well integrated with one another. This saves the team time and effort as they do not need to spend the time and effort to integrate various services with each other. 
-2. Lambda is chosen such that the team do not need to create and maintain their own infrastructure. Lambda helps the team run the data/image processing automatically from the API gateway and Kafka stream and store the processed data in Redshift and S3.
+2. Lambda is chosen such that the team do not need to create and maintain their own infrastructure due to its serverless nature. Lambda helps the team run the data/image processing automatically from the API gateway and Kafka stream and store the processed data in Redshift and S3. Similarly, S3, Redshift, QuickSight is chosen for its serverless nature.
 3. Redshift is chosen to store the structured data to be used for Business Intelligence as it is a great data warehousing solution and it is also a service provided by AWS, making it very easy to set it up as one of the lambda destinations.
 4. S3 is chosen to store processed image data for 7 days while processed image data after 7 days will be stored in S3 Glacier Deep Archive to save cost. S3 Glacier Deep Archive is good for long term storage that we do not need to access/restore much (max 2-3 times per year) as the cost is extremely low (Amazon S3's lowest cost storage class) and safety is high. S3 is more for frequent usage and we do not need that for our archived data. 
-5. QuickSight is chosen for our Business Intelligence tool for dashboarding and visualisations. Apart from it being an AWS service, making it easy to integrate with Redshift, it is also a great tool for visualisation.
-
+5. QuickSight is chosen for our Business Intelligence tool for dashboarding and visualisations. Apart from it being an AWS service, making it easy to integrate with Redshift, it is also a great tool for visualisation as it enables end-users to dive deep into data through simple questions without BI training.
 
 ### Cons of design:
-1. Although the services provided by AWS are great, there are still some ways that it could be better.
-- Accessing and restoring data from S3 Glacier Deep Archive is very costly and response time is long as well.
-- Some charts and graph options are not available in QuickSight. 
+1. Images that are older than 7 days old are not be accessed frequently. However if we do require these photos, accessing and restoring data from S3 Glacier Deep Archive is very costly and response time is long as well.
+2. Without knowing the exact BI requirements, QuickSight is chosen as it covers majority of the use cases. However if the BI team requires a very specific chart, QuickSight might not have it.
+
 
